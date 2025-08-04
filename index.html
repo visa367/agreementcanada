@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Visa File Checker</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .slideshow {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-size: cover;
+      background-position: center;
+      animation: slide 20s infinite;
+    }
+
+    @keyframes slide {
+      0%    { background-image: url('images/australia.png'); }
+      25%   { background-image: url('images/canada.png'); }
+      50%   { background-image: url('images/saudi.png'); }
+      75%   { background-image: url('images/uk.png'); }
+      100%  { background-image: url('images/australia.png'); }
+    }
+
+    .content {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-box {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px 40px;
+      border-radius: 20px;
+      color: white;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    }
+
+    .form-box h2 {
+      margin-bottom: 20px;
+      font-size: 26px;
+      letter-spacing: 1px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #27ae60;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #1e8749;
+    }
+  </style>
+</head>
+<body>
+  <div class="slideshow"></div>
+
+  <div class="content">
+    <div class="form-box">
+      <h2>Check Your Visa File</h2>
+      <input type="text" id="passport" placeholder="Enter Passport Number" required>
+      <input type="date" id="dob" required>
+      <button onclick="checkFile()">Search File</button>
+    </div>
+  </div>
+
+  <script>
+    function checkFile() {
+      const passport = document.getElementById("passport").value.trim();
+      const dobInput = document.getElementById("dob").value;
+
+      if (!passport || !dobInput) {
+        alert("Please enter both Passport Number and Date of Birth.");
+        return;
+      }
+
+      const dobParts = dobInput.split("-");
+      const formattedDOB = `${dobParts[2]}-${dobParts[1]}-${dobParts[0]}`;
+
+      if (passport === "HB4116475" && formattedDOB === "01-01-1985") {
+        // Open in new tab with Google Drive preview link (not download)
+        const previewLink = "https://drive.google.com/file/d/1eGoNZErEwvRCP1weyfI40VQCTK7akNIR/preview";
+        window.open(previewLink, "_blank");
+      } else {
+        alert("❌ Incorrect passport number or date of birth!");
+      }
+    }
+  </script>
+</body>
+</html>
